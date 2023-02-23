@@ -1,0 +1,17 @@
+{
+    "name": "ftembe/client-info",
+    "description": "Getting The Client Information",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kitara\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ftembe",
+            "email": "franciscojtembe@gmail.com"
+        }
+    ],
+    "require": {}
+}
