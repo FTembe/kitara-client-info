@@ -5,12 +5,13 @@ namespace Kitara;
 class Client
 {
 
-    private  $get_user_agent = null;
+    protected  $get_user_agent = null;
     public  $os = null;
     public  $ip = null;
     public  $browser = null;
     public  $device = null;
     public  $plataform = null;
+    public  $country = null;
     public  function __construct()
     {
         $this->get_user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -19,6 +20,7 @@ class Client
         $this->ip = $this->get_ip();
         $this->browser = $this->get_browser();
         $this->device = $this->get_device();
+        $this->country = $this->get_country();
     }
 
 
@@ -46,15 +48,33 @@ class Client
             $ip = 'UNKNOWN';
         return $ip;
     }
+    private function get_country(): array
+    {
 
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . "41.77.128.194"));
+
+        if ($ipdat->geoplugin_status == 404)
+            return [];
+        return [
+            'ip' => $this->ip,
+            'CountryName' => $ipdat->geoplugin_countryName ? $ipdat->geoplugin_countryName : '',
+            'CityName' => $ipdat->geoplugin_city ? $ipdat->geoplugin_city : '',
+            'ContinentName' => $ipdat->geoplugin_continentName ? $ipdat->geoplugin_continentName : '',
+            'Latitude' => $ipdat->geoplugin_latitude ? $ipdat->geoplugin_latitude : '',
+            'Longitude' => $ipdat->geoplugin_longitude ? $ipdat->geoplugin_longitude : '',
+            'CurrencySymbol' => $ipdat->geoplugin_currencySymbol ? $ipdat->geoplugin_currencySymbol : '',
+            'CurrencyCode' => $ipdat->geoplugin_currencyCode ? $ipdat->geoplugin_currencyCode : '',
+            'Timezone' => $ipdat->geoplugin_timezone ? $ipdat->geoplugin_timezone : '',
+        ];
+    }
     private  function get_os()
     {
 
         $user_agent =   $this->get_user_agent;
         $os    =   "Unknown OS Platform";
         $os_array       =   array(
-            '/windows nt 11/i'         => 'Windows 11',
-            '/windows nt 10/i'         => 'Windows 10',
+            '/windows nt 11/i'      => 'Windows 11',
+            '/windows nt 10/i'      => 'Windows 10',
             '/windows nt 6.3/i'     =>  'Windows 8.1',
             '/windows nt 6.2/i'     =>  'Windows 8',
             '/windows nt 6.1/i'     =>  'Windows 7',
