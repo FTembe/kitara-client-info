@@ -51,7 +51,7 @@ class Client
     private function get_country(): array
     {
 
-        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . "41.77.128.194"));
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $this->ip ));
 
         if ($ipdat->geoplugin_status == 404)
             return [];
