@@ -13,5 +13,8 @@
             "email": "franciscojtembe@gmail.com"
         }
     ],
-    "require": {}
+    ,
+    "require": {
+        "php": ">=7.0"
+    }
 }
