@@ -15,6 +15,8 @@ composer require ftembe/client-info
 
 ### Usage
 ```php 
+require('vendor/autoload.php');
+
 use Kitara\Client;
 
 $client = new Client;
@@ -32,14 +34,3 @@ echo $client->country['Timezone'];
 
 ```
 
-### Or
-
-```php
-
-require('vendor/autoload.php');
-
-use Kitara\Client;
-
-$client = new Client;
-var_dump($client);
-```
