@@ -15,8 +15,10 @@ composer require ftembe/client-info
 
 ### Usage
 ```php 
+use Kitara\Client;
 
 $client = new Client;
+
 echo $post_id;
 echo $client->ip;
 echo $client->browser;
@@ -28,4 +30,16 @@ echo $client->country['Latitude'];
 echo $client->country['Longitude'];
 echo $client->country['Timezone'];
 
+```
+
+### Or
+
+```php
+
+require('vendor/autoload.php');
+
+use Kitara\Client;
+
+$client = new Client;
+var_dump($client);
 ```
